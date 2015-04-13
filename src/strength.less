@@ -1,0 +1,31 @@
+@base-color: #fff;
+
+@strength-very-weak: #FFA0A0;
+@strength-weak: #FFB78C;
+@strength-medium: #FFEC8C;
+@strength-strong: #c7ff87;
+@strength-very-strong: #b5ff9b;
+
+.horizontal-gradient(@start, @end, @percent) {
+  background: @start;
+  background: -moz-linear-gradient(left, @start 0%, @start @percent, @end @percent, @end 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,@start), color-stop(@percent,@start), color-stop(@percent,@end), color-stop(100%,@end));
+  background: -webkit-linear-gradient(left, @start 0%,@start @percent,@end @percent,@end 100%);
+  background: -o-linear-gradient(left, @start 0%,@start @percent,@end @percent,@end 100%);
+  background: -ms-linear-gradient(left, @start 0%,@start @percent,@end @percent,@end 100%);
+  background: linear-gradient(to right, @start 0%,@start @percent,@end @percent,@end 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@start', endColorstr='@end', GradientType=1);
+}
+
+.strength-input(@strength-color, @percent) {
+  .horizontal-gradient(@strength-color, @base-color, @percent);
+  border-color: darken(@strength-color, 10%);
+}
+
+.strength {
+  &.very-weak   { .strength-input(@strength-very-weak, 20%) }
+  &.weak        { .strength-input(@strength-weak, 40%) }
+  &.medium      { .strength-input(@strength-medium, 60%) }
+  &.strong      { .strength-input(@strength-strong, 80%) }
+  &.very-strong { .strength-input(@strength-very-strong, 100%) }
+}
